@@ -1,13 +1,13 @@
 variable "region" {
-    default = "sa-east-1"
+  default = "sa-east-1"
 }
 
 variable "project_name" {
-    default = "Campus-JH"
+  default = "Campus-JH"
 }
 
 variable "environment" {
-    default = "Testing"
+  default = "Testing"
 }
 
 # variable "availability_zone" {
