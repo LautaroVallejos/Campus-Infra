@@ -1,11 +1,11 @@
 # Terraform backend config
 terraform {
   backend "s3" {
-    bucket         = "campus-bucket-jh"
+    bucket         = "campus-bucket-jh-testing"
     key            = "state/terraform.tfstate"
-    region         = "us-east-1"
+    region         = "sa-east-1"
     encrypt        = true
-    kms_key_id     = "alias/bucket-key"
+    kms_key_id     = "alias/campus-key-bucket-testing"
   }
 
 }
@@ -16,6 +16,6 @@ resource "aws_kms_key" "bucket-key" {
 }
 
 resource "aws_kms_alias" "key-alias" {
- name          = "alias/campus-key-bucket"
+ name          = "alias/campus-key-bucket-testing"
  target_key_id = aws_kms_key.bucket-key.key_id
 }
