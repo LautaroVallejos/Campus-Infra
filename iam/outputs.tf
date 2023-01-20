@@ -11,5 +11,5 @@ output "group" {
 }
 
 output "ec2_profile" {
-    value = aws_iam_instance_profile.ec2_role.name
+    value = aws_iam_instance_profile.ec2_role.id
 }

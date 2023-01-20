@@ -68,6 +68,6 @@ resource "aws_iam_policy_attachment" "campus-attach" {
 
 # Profile for EC2 instance
 resource "aws_iam_instance_profile" "ec2_role" {
-    name = "ec2-campus-master-${var.environment}"
-    role = aws_iam_role.role.name
+  name = "ec2-campus-master-${var.environment}"
+  role = aws_iam_role.role.name
 }
