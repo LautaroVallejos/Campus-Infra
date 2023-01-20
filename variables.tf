@@ -9,3 +9,7 @@ variable "project_name" {
 variable "environment" {
     default = "Testing"
 }
+
+# variable "availability_zone" {
+#     default = "us-east-1a"
+# }

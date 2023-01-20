@@ -1,13 +1,17 @@
 module "iam"{
-    source = "./module/iam"
+    source = "./modules/iam"
 }
 
 # module "dynamodb" {
 #     source = "./module/dynamodb"
 # }
 
-module "EC2" {
-    source = "./module/ec2"
+module "ec2" {
+    source = "./modules/ec2"
     # project_name = var.project_name
     # environment = var.environment
+}
+
+module "vpc" {
+    source = "./modules/vpc"
 }
