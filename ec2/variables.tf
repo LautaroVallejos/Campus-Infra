@@ -5,7 +5,3 @@ variable "key_name" {
 variable "public_key" {
   default = "~/Desktop/projects/Campus-Infra/ec2/.keys/campus-key.pub"
 }
-
-variable "environment" {
-  default = "Testing"
-}

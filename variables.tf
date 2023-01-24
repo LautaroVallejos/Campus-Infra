@@ -10,6 +10,10 @@ variable "environment" {
   default = "Testing"
 }
 
-# variable "availability_zone" {
-#     default = "us-east-1a"
-# }
+variable "key_name" {
+  default = "~/Desktop/projects/Campus-Infra/ec2/.keys/campus-key"
+}
+
+variable "public_key" {
+  default = "~/Desktop/projects/Campus-Infra/ec2/.keys/campus-key.pub"
+}

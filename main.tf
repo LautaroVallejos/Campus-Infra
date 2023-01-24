@@ -1,28 +1,47 @@
-# module "iam"{
-#     source = "./iam"
+# Modules
+module "iam" {
+  source = "./iam"
+}
 
-# }
-
-# module "dynamodb" {
-#     source = "./module/dynamodb"
-# }
+module "vpc" {
+  source = "./vpc"
+}
 
 module "ec2" {
   source = "./ec2"
 
-  # iam_instance_profile = module.iam.ec2
-
-  # aws_iam_instance_profile = module.iam.ec2_profile
-  # iam_instance_profile = module.iam.ec2_profile
-  # firewall = modules.vpc.aws_security_group.firewall.id
-  # subnet  = modules.vpc.aws_subnet.public_subnet.id
-
-  # depends_on = [
-  #   module.iam,
-  #   module.vpc
-  # ]
+  depends_on = [
+    module.iam,
+    module.vpc
+  ]
 }
 
-# module "vpc" {
-#     source = "./vpc"
-# }
+# EC2 instance
+resource "aws_instance" "web_server" {
+  ami           = module.ec2.ami_name.id
+  key_name      = var.key_name
+  instance_type = "t2.micro"
+
+  iam_instance_profile   = module.iam.ec2_profile
+  subnet_id              = module.vpc.public_subnet
+  vpc_security_group_ids = [module.vpc.firewall]
+
+  tags = {
+    Name = "Campus-JH-${var.environment}"
+  }
+
+  connection {
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = file(var.key_name)
+  }
+}
+
+# Outputs
+output "public_dns" {
+  value = aws_instance.web_server.*.public_dns
+}
+output "public_ip" {
+  value = aws_instance.web_server.*.public_ip
+}

@@ -17,6 +17,6 @@ resource "aws_kms_key" "bucket-key" {
 }
 
 resource "aws_kms_alias" "key-alias" {
- name          = "alias/campus-key-bucket-testing"
+ name          = "alias/campus-key-testing"
  target_key_id = aws_kms_key.bucket-key.key_id
 }
