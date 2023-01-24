@@ -78,6 +78,7 @@ resource "aws_security_group" "firewall" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "NGINX Port"
   }
 
   ingress {
@@ -85,6 +86,15 @@ resource "aws_security_group" "firewall" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "SSH Port"
+  }
+
+  ingress {
+    from_port   = 21
+    to_port     = 21
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "FTP Port"
   }
 
   ingress {

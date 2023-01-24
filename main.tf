@@ -21,6 +21,7 @@ resource "aws_instance" "web_server" {
   ami           = module.ec2.ami_name.id
   key_name      = var.key_name
   instance_type = "t2.micro"
+  user_data = "${file("./provisioner.sh")}"
 
   iam_instance_profile   = module.iam.ec2_profile
   subnet_id              = module.vpc.public_subnet
