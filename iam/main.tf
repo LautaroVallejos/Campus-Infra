@@ -43,11 +43,9 @@ resource "aws_iam_policy" "policy" {
   "Statement": [
     {
       "Action": [
-        "dynamodb:DescribeTable",
-        "dynamodb:GetItem",
-        "dynamodb:PutItem",
-        "dynamodb:DeleteItem",
-        "s3:*"
+        "s3:*",
+        "ec2:*",
+        "rds:*"
       ],
       "Effect": "Allow",
       "Resource": "*"

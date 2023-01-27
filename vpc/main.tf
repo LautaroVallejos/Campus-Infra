@@ -74,13 +74,12 @@ resource "aws_security_group" "firewall" {
   vpc_id = aws_vpc.campus_vpc.id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = 21
+    to_port     = 21
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "NGINX Port"
+    description = "FTP Port"
   }
-
   ingress {
     from_port   = 22
     to_port     = 22
@@ -88,21 +87,36 @@ resource "aws_security_group" "firewall" {
     cidr_blocks = ["0.0.0.0/0"]
     description = "SSH Port"
   }
-
   ingress {
-    from_port   = 21
-    to_port     = 21
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "FTP Port"
+    description = "HTTP Port"
   }
 
   ingress {
-    from_port   = 3000
-    to_port     = 3000
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTPS Port"
+  }
+
+ingress {
+    from_port   = 1337
+    to_port     = 1337
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    description = "Strapi Port"
   }
+
+  # ingress {
+  #   from_port   = 3000
+  #   to_port     = 3000
+  #   protocol    = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"]
+  # }
 
   egress {
     from_port   = 0
