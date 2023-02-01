@@ -1,7 +1,7 @@
 variable "environment" {
-  default = "Testing"
+  type = string
 }
 
 variable "availability_zone" {
-  default = "sa-east-1a"
+  type = string
 }

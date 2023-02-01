@@ -110,13 +110,14 @@ ingress {
     cidr_blocks = ["0.0.0.0/0"]
     description = "Strapi Port"
   }
+  
 
-  # ingress {
-  #   from_port   = 3000
-  #   to_port     = 3000
-  #   protocol    = "tcp"
-  #   cidr_blocks = ["0.0.0.0/0"]
-  # }
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   egress {
     from_port   = 0
@@ -125,4 +126,7 @@ ingress {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  tags = {
+    Name = "Campus-Firewall"
+  }
 }

@@ -1,19 +1,23 @@
 variable "region" {
-  default = "sa-east-1"
+  type = string
 }
 
-variable "project_name" {
-  default = "Campus-JH"
+variable "instance_type" {
+  type = string
 }
 
 variable "environment" {
-  default = "Testing"
+  type = string
 }
 
 variable "key_name" {
-  default = "~/Desktop/projects/Campus-Infra/ec2/.keys/campus-key"
+  type = string
 }
 
 variable "public_key" {
-  default = "~/Desktop/projects/Campus-Infra/ec2/.keys/campus-key.pub"
+  type = string
+}
+
+variable "availability_zone" {
+  type = string
 }

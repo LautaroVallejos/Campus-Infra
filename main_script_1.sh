@@ -16,12 +16,13 @@ git config --global user.name "Lautaro Vallejos"
 ssh-keygen -t rsa -f /tmp/git-key -b 4096 -C "lautaro.vallejosk4m@gmail.com" -N ""
 eval $(ssh-agent -s)
 ssh-add /tmp/git-key
-touch /tmp/copyThisInGH.txt
-cat /tmp/git-key.pub >> /tmp/copyThisInGH.txt
 
+# Starting Deployment
 echo "####################################"
-echo "#     ADD THIS KEY IN GITHUB       #"
+echo "#       Starting Deployment        #"
 echo "####################################"
-cat /tmp/copyThisInGH.txt
-
-## GO TO ADD SSH KEY TO GH ACCOUNT
+sudo apt install -y docker-compose
+git clone https://github.com/LautaroVallejos/Campus-Cloud.git
+cd Campus-Cloud/
+mv /tmp/.env ~/Campus-Cloud/
+docker-compose up
