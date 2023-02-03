@@ -1,14 +1,25 @@
-variable "db_name" {
+variable "db_instance" {
     type = string
-    default = "campus_db_testing"
 }
 
 variable "db_username" {
-    type = string
-    default = "SrMandioca"  
+    type = string  
 }
 
 variable "db_password" {
     type = string
-    default = "notSecureChangeMe2511$"
 }
+
+variable "db_subnet" {
+  type = string
+}
+
+variable "private_subnet" {
+  type = string
+}
+
+variable "db_name" {
+    type = string
+}
+
+variable "vpc_id" {}

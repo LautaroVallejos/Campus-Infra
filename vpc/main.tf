@@ -16,22 +16,34 @@ resource "aws_subnet" "public_subnet" {
   vpc_id                  = aws_vpc.campus_vpc.id
   cidr_block              = "18.0.12.0/24"
   map_public_ip_on_launch = "true"
-  availability_zone       = var.availability_zone
+  availability_zone       = var.availability_zone[0]
 
   tags = {
     Name = "Campus-Public-Subnet-${var.environment}"
   }
 }
 
-# Private Subnet Setting (RDS)
+# Private Subnet Setting (RDS A)
 resource "aws_subnet" "private_subnet" {
   vpc_id                  = aws_vpc.campus_vpc.id
   cidr_block              = "18.0.23.0/24"
   map_public_ip_on_launch = "false"
-  availability_zone       = var.availability_zone
+  availability_zone       = var.availability_zone[1]
 
   tags = {
-    Name = "Campus-Private-Subnet-${var.environment}"
+    Name = "Campus-Private-SubnetA-${var.environment}"
+  }
+}
+
+# Private Subnet Setting (RDS B)
+resource "aws_subnet" "db_subnet" {
+  vpc_id                  = aws_vpc.campus_vpc.id
+  cidr_block              = "18.0.24.0/24"
+  map_public_ip_on_launch = "false"
+  availability_zone       = var.availability_zone[2]
+
+  tags = {
+    Name = "Campus-Private-SubnetB-${var.environment}"
   }
 }
 

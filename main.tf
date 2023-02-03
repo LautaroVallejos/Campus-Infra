@@ -8,18 +8,39 @@ module "iam" {
 module "vpc" {
   source = "./vpc"
 
-  environment = var.environment
+  environment       = var.environment
   availability_zone = var.availability_zone
 }
 
 module "ec2" {
   source = "./ec2"
 
-  key_name = var.key_name
+  key_name   = var.key_name
   public_key = var.public_key
 
   depends_on = [
     module.iam,
+    module.vpc
+  ]
+}
+
+data "aws_vpc" "selected" {
+  id = module.vpc.vpc_id
+}
+
+module "rds" {
+  source = "./rds"
+
+  vpc_id         = module.vpc.vpc_id
+  db_subnet      = module.vpc.db_subnet
+  private_subnet = module.vpc.private_subnet
+
+  db_instance = var.db_instance
+  db_name     = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
+
+  depends_on = [
     module.vpc
   ]
 }
@@ -61,7 +82,7 @@ resource "aws_instance" "web_server" {
     }
   }
   provisioner "file" {
-    source = "./install_docker.sh"
+    source      = "./install_docker.sh"
     destination = "/tmp/install_docker.sh"
 
     connection {
@@ -73,7 +94,7 @@ resource "aws_instance" "web_server" {
   }
 
   provisioner "file" {
-    source = "./install_jekins.sh"
+    source      = "./install_jekins.sh"
     destination = "/tmp/install_jenkins.sh"
 
     connection {
@@ -108,10 +129,5 @@ resource "aws_instance" "web_server" {
   }
 }
 
-# Outputs
-output "public_dns" {
-  value = aws_instance.web_server.*.public_dns
-}
-output "public_ip" {
-  value = aws_instance.web_server.*.public_ip
-}
+
+
