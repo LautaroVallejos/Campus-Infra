@@ -40,6 +40,7 @@ resource "aws_db_instance" "campus-db" {
   db_subnet_group_name        = aws_db_subnet_group.rds-intranet.name
   vpc_security_group_ids      = [aws_security_group.rds-firewall.id]
   skip_final_snapshot         = true
+  # deletion_protection = true # Comment and terraform apply to destroy db instance
 
   tags = {
     Name = "Campus-DB"

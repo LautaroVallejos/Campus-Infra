@@ -43,12 +43,13 @@ resource "aws_iam_policy" "policy" {
   "Statement": [
     {
       "Action": [
-        "s3:*",
-        "ec2:*",
-        "rds:*"
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject",
+        "s3:ListObject"
       ],
       "Effect": "Allow",
-      "Resource": "*"
+      "Resource": "arn:aws:s3:::campus-bucket-jh-testing"
     }
   ]
 }
