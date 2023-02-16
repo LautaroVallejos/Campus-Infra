@@ -84,38 +84,39 @@ resource "aws_route_table_association" "private_association" {
 # Security Group
 resource "aws_security_group" "firewall" {
   vpc_id = aws_vpc.campus_vpc.id
-
+  description = "Main security group for Campus plataform"
   ingress {
+    description = "FTP Port"
     from_port   = 21
     to_port     = 21
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "FTP Port"
+    cidr_blocks = [aws_vpc.campus_vpc.cidr_block]
   }
   ingress {
+    description = "SSH Port"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "SSH Port"
   }
   ingress {
+    description = "HTTP Port"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "HTTP Port"
   }
 
   ingress {
+    description = "HTTPS Port"
     from_port = 443
     to_port = 443
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "HTTPS Port"
   }
 
 ingress {
+    description = "Strapi port"
     from_port   = 1337
     to_port     = 1337
     protocol    = "tcp"
@@ -125,6 +126,7 @@ ingress {
   
 
   ingress {
+    description = "Postgresql port"
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
@@ -132,10 +134,11 @@ ingress {
   }
 
   egress {
+    description = "egress rule"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [aws_vpc.campus_vpc.cidr_block]
   }
 
   tags = {

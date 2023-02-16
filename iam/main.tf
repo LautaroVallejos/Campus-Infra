@@ -33,9 +33,10 @@ resource "aws_iam_group" "group" {
 }
 
 # Policy
-resource "aws_iam_policy" "policy" {
+resource "aws_iam_group_policy" "policy" {
   name        = "campus-admin-policy"
   description = "Campus JH policy"
+  group = aws_iam_group.group.name
 
   policy = <<EOF
 {
@@ -49,7 +50,12 @@ resource "aws_iam_policy" "policy" {
         "s3:ListObject"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:s3:::campus-bucket-jh-testing"
+      "Resource": "arn:aws:s3:::campus-bucket-jh-testing",
+      "Condition": {
+          "Bool": {
+              "aws:MultiFactorAuthPresent": ["true"]
+          }
+      }
     }
   ]
 }

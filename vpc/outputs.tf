@@ -18,3 +18,6 @@ output "vpc_id" {
   value = aws_vpc.campus_vpc.id
 }
 
+output "cidr_block" {
+  value = aws_vpc.campus_vpc.cidr_block
+}

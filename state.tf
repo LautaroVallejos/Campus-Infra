@@ -12,7 +12,8 @@ terraform {
 
 # Bucket Key
 resource "aws_kms_key" "bucket-key" {
-  # name = "Campus-Keyss"
+  name = "Campus-Keys"
+  enable_key_rotation = true
   description = "This key is used to encrypt bucket objects"
 }
 

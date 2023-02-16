@@ -34,6 +34,7 @@ module "rds" {
   vpc_id         = module.vpc.vpc_id
   db_subnet      = module.vpc.db_subnet
   private_subnet = module.vpc.private_subnet
+  cidr_block     = module.vpc.cidr_block
 
   db_instance = var.db_instance
   db_name     = var.db_name
@@ -54,6 +55,14 @@ resource "aws_instance" "web_server" {
   iam_instance_profile   = module.iam.ec2_profile
   subnet_id              = module.vpc.public_subnet
   vpc_security_group_ids = [module.vpc.firewall]
+
+  root_block_device {
+      encrypted = true
+  }
+
+  metadata_options {
+     http_tokens = "required"
+  } 
 
   tags = {
     Name = "Campus-JH-${var.environment}"
