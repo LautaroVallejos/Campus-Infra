@@ -28,23 +28,22 @@ data "aws_vpc" "selected" {
   id = module.vpc.vpc_id
 }
 
-module "rds" {
-  source = "./rds"
+# module "rds" {
+#   source = "./rds"
 
-  vpc_id         = module.vpc.vpc_id
-  db_subnet      = module.vpc.db_subnet
-  private_subnet = module.vpc.private_subnet
-  cidr_block     = module.vpc.cidr_block
+#   vpc_id         = module.vpc.vpc_id
+#   db_subnet      = module.vpc.db_subnet
+#   private_subnet = module.vpc.private_subnet
+#   cidr_block     = module.vpc.cidr_block
 
-  db_instance = var.db_instance
-  db_name     = var.db_name
-  db_username = var.db_username
-  db_password = var.db_password
+#   db_instance = var.db_instance
+#   db_name     = var.db_name
+#   db_username = var.db_username
+#   db_password = var.db_password
 
-  depends_on = [
-    module.vpc
-  ]
-}
+# }
+
+
 
 # EC2 instance
 resource "aws_instance" "web_server" {

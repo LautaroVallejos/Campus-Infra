@@ -81,6 +81,8 @@ resource "aws_route_table_association" "private_association" {
   route_table_id = aws_route_table.route_table.id
 }
 
+
+
 # Security Group
 resource "aws_security_group" "firewall" {
   vpc_id = aws_vpc.campus_vpc.id
@@ -121,7 +123,6 @@ ingress {
     to_port     = 1337
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    description = "Strapi Port"
   }
   
 

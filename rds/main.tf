@@ -34,6 +34,12 @@ resource "mysql_role" "developer" {
   name = "developer"
 }
 
+provider "mysql" {
+  endpoint = "${aws_db_instance.campus-db.endpoint}"
+  username = "${aws_db_instance.campus-db.username}"
+  password = "${aws_db_instance.campus-db.password}"
+}
+
 resource "aws_db_instance" "campus-db" {
   allocated_storage           = 20
   storage_type                = "gp2"
